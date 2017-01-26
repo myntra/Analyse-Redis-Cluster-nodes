@@ -24,5 +24,5 @@ hostname is `localhost` by default
 
 ![](https://github.com/sidd081/Analyse-Redis-Cluster-nodes/blob/master/Screen%20Shot%202017-01-26%20at%2011.40.40.png)
 
-Red Color denotes `master` and `slave` both are present on same machine, which should not happen ideally.
-Green Color denotes OK
+>Red Color denotes `master` and `slave` both are present on same machine, which should not happen ideally.
+>Green Color denotes OK
