@@ -1,4 +1,3 @@
-https://github.com/sidd081/Analyse-Redis-Cluster-nodes/blob/master/Screen%20Shot%202017-01-26%20at%2011.40.40.png
 # Analyse-Redis-Cluster-nodes
 
 Tired of analysing redis cluster using `cluster nodes` command. Try using this simple shell script. 
