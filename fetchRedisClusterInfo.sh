@@ -1,10 +1,12 @@
 #!/bin/sh
 
+
 host='localhost'
+echo $#
 while [[ $# -gt 1 ]]
 do
   key="$1"
-  
+
   case $key in
     -p|--port)
       port="$2"
@@ -27,4 +29,4 @@ redis-cli -c -h $host -p $port cluster nodes | awk  -F: '{print $1 " " $2}' | aw
 echo -e "\n\nMASTER SLAVE INFO"
 #redis-cli  -c -p 7001 cluster nodes | awk '{printf "%-25s  %-15s %s\n", $2, $3, $8}' | sort
 #echo -e " \n\n\n"
-redis-cli  -c -h $host -p $port cluster nodes | awk '{if ($4 != "-" ){$1 = $4} hash[$1]++; if($3 ~ /master/){freq[$1, "master"]=$2; hashSlot[$1] = $9} else if($3 ~ /slave/){freq[$1, "slave"]=$2 "," freq[$1, "slave"] } else{freq [$1, $3]=$2}} END{printf("%-40s %-20s %-20s %-20s\n" ,"hashCode", "master", "slave", "hashSlot"); for (var in hash) {IFS=":" read -ra master <<< freq[var, "master"] ;master_ip = master[0]}}'   
+redis-cli  -c -h $host -p $port cluster nodes | awk '{if ($4 != "-" ){$1 = $4} hash[$1]++; if($3 ~ /master/){freq[$1, "master"]=$2; hashSlot[$1] = $9} else if($3 ~ /slave/){freq[$1, "slave"]=$2 "," freq[$1, "slave"] } else{freq [$1, $3]=$2}} END{printf("%-40s %-20s %-20s %-20s\n" ,"hashCode", "master", "slave", "hashSlot"); for (var in hash) {split(freq[var, "master"], master, ":"); master_ip = master[1] ;  split(freq[var, "slave"], slave, ":") ;slave_ip = slave[1] ;  if (master_ip == slave_ip) { printf("\033[1;31m%-40s %-20s %-20s %-20s \033[0m\n", var, freq[var, "master"], freq[var, "slave"], hashSlot[var]) } else { printf("\033[1;32m%-40s %-20s %-20s %-20s \033[0m\n", var, freq[var, "master"], freq[var, "slave"], hashSlot[var])}}}'
