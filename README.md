@@ -1,6 +1,16 @@
 # Analyse-Redis-Cluster-nodes
 
-Tired of analysing redis cluster using `cluster nodes` command. Try using this simple shell script. 
+Ever tried using `cluster nodes` command on your redis cluster? If not, please try runnning this command on your cluster. Basically, the output of the command is just a space-separated CSV string, where each line represents a node in the cluster. Through this one can analyse the current state of Redis Cluster e.g. which all nodes are currently active, which node is slave of which master node, which node is master etc.
+
+Sometimes while setting up cluster, it might happen that slave of any master node resides on same machine as of master, which doesn't make any sense. Such anomalies can be analysed using `cluster nodes` command.
+
+In case of small cluster(lets say cluster of size <20 nodes), its easy to analyse through `cluster nodes` command that whether cluster is setup properly or not. 
+![](https://github.com/myntra/Analyse-Redis-Cluster-nodes/blob/master/six_node_cluster.png)
+
+But in case of large cluster, it becomes cumbersome to read through its output and to check cluster status as you can see below
+![](https://github.com/myntra/Analyse-Redis-Cluster-nodes/blob/master/large_cluster.png)
+
+In such cases, this scripts comes handy
 
 ## Getting Started
 
